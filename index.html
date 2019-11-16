@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Hello Word</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">{{content}}</div>
+    <script>
+    	// 原来的写法
+    	// var dom = document.getElementById('app');
+    	// dom.innerHTML = 'hello word'
+    	// setTimeout(function(){
+    	// 	dom.innerHTML = "hello word 2"
+    	// }, 2000)
+    	var app = new Vue({
+    		el: '#app',
+    		data: {
+    			content: 'hello worda'
+    		}
+    	})
+    	setTimeout(function(){
+    		app.$data.content = 'bye world'
+    	}, 2000)
+    </script>
+</body>
+
+</html>
