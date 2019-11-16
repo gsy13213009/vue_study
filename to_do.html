@@ -14,15 +14,34 @@
       <!-- 使用v-on:click绑定点击事件 -->
       <button v-on:click="handleBtnClick">提交</button>
       <ul>
-        <!-- 使用v-for循环遍历list -->
-        <li v-for="item in list">
-          {{item}}
-        </li>
+        <!-- 使用v-bind:content将item的值通过content传递到组件中, v-bind可以省略 -->
+        <!-- @delete接收子组件传递过来的事件 -->
+        <todo-item :content="item" 
+                   :index="index"
+                   v-for="(item, index) in list"
+                   @delete="handleItemDelete">
+        </todo-item>
       </ul>
     </div>
     <script>
+      <!-- 局部组件 -->
+      var TodoItem = {
+        props: ['content', 'index'],
+        <!-- @click是v-on:click的简写 -->
+        template: "<li @click='handleItemClick'>{{content}}</li>",
+        methods: {
+          handleItemClick: function() {
+            this.$emit("delete", this.index)
+          }
+        }
+      }
+
     	var app = new Vue({
     		el: '#app',
+        <!-- 局部组件需要注册 -->
+        components: {
+          TodoItem: TodoItem
+        },
     		data: {
           list: ['第一课的内容', '第二课的内容', '33333'],
           inputValue: 'hhhhh'
@@ -31,6 +50,10 @@
           handleBtnClick: function() {
             this.list.push(this.inputValue)
             this.inputValue = ''
+          },
+          handleItemDelete: function(index) {
+            alert(index)
+            this.list.splice(index, 1)
           }
         }
     	})
