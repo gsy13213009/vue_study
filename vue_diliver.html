@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Vue 实例</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <counter :count="3" ref="one" @change="handleChange"></counter>
+    <counter :count="4" ref="two" @change="handleChange"></counter>
+    <div>{{sum}}</div>
+  </div>
+  <script>
+    var counter = {
+      // 接收父组件传递过来的参数
+      props: ['count'],
+      data: function() {
+        return {
+          // 子组件不能修改父组件传递过来的参数，需要一个副本
+          number: this.count
+        }
+      },
+      template: '<div @click="handleClick">{{number}}</div>',
+      methods: {
+        handleClick: function() {
+          this.number += 2;
+          this.$emit('change', 2)
+        }
+      }
+    };
+    var vm = new Vue({
+      el: '#root',
+      data: {
+        sum: 7
+      },
+      methods: {
+        // 使用step接收子组件传递出来的参数
+        handleChange: function(step) {
+          // 使用$refs.one获得第一个conter的引用
+          // console.log(this.$refs.one.number)
+          // this.sum = this.$refs.one.number + this.$refs.two.number
+          this.sum += step
+        }
+      },
+      components: {
+        counter: counter
+      }
+    })
+  </script>
+</body>
+</html>

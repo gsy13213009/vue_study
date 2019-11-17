@@ -8,12 +8,14 @@
 </head>
 
 <body>
+    <!-- dom文档，也就是MVP中的View层 -->
     <div id="app">
       <input type="text" id="input"/>
       <button id="btn">提交</button>
       <ul id="ul"></ul>
     </div>
     <script>
+      <!-- 控制逻辑，接受View传递过来的事件，刷新数据并操作dom，属于Presenter层 -->
       function Page() {}
       $.extend(Page.prototype, {
         init: function() {

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Vue 实例</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <div v-if="show === 'a'">Hello word</div>
+    <div v-else-if="show === 'b'">hhhhh word</div>
+    <div v-else=>Bye</div>
+    <!-- v-show性能高，因为不用改变dom -->
+    <div v-show="show">hhhhhh</div>
+    <!-- 使用key值可以避免元素复用的问题 -->
+    <div v-if="show">
+      用户名：<input key="username">
+    </div>
+    <div v-else>
+      邮箱：<input key="password">
+    </div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#root',
+      data: {
+        show: "a"
+      },
+    })
+  </script>
+</body>
+</html>

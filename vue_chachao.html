@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Vue 实例</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <counter>
+      <!-- counter组件的插槽，使用props接收子组件传递过来的参数 -->
+      <template slot-scope="props">
+        <!-- 决定子组件展示的样式 -->
+        <h1>{{prpos.item}}</h1>
+      </template>
+    </counter>
+  </div>
+  <script>
+    var counter = {
+      data: function() {
+        return {
+          list: [1, 2, 3, 4, 5]
+        }
+      },
+      // 使用slot接收插槽，使用:item向父组件传递item属性
+      template: `<div>
+                  <ul>
+                    <slot v-for="item of list" :item=item>
+                    </slot>
+                  </ul>
+                </div>`
+    }
+    var vm = new Vue({
+      el: '#root',
+      methods: {
+        handleClick: function(step) {
+          alert("hhhhh")
+        }
+      },
+      components: {
+        counter: counter
+      }
+    })
+  </script>
+</body>
+</html>
