@@ -8,10 +8,12 @@
 </head>
 <body>
   <div id="root">
-    <!-- 如果不写name，默认的那么是v，因此在style里面就需要用v开头, v-enter -->
+    <!-- 使用animate.css的动画效果 -->
     <transition name="fade"
+                appear
                 enter-active-class="animated swing"
                 leave-active-class="animated shake"
+                appear-active-class="animated bounce"
     >
       <div v-if="show">
         hello word
