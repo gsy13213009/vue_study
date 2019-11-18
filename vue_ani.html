@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Vue 实例</title>
+  <script src="./vue.js"></script>
+  <style>
+    // 使用fade开头的动画，有leave和enter两种情况
+    .fade-leave-to,
+    .fade-enter {
+      opacity: 0;
+    }
+    .fade-leave-active,
+    .fade-enter-active {
+      // 如果opacity变化，在3s内变化完毕
+      transition: opacity 3s;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <!-- 如果不写name，默认的那么是v，因此在style里面就需要用v开头, v-enter -->
+    <transition name="fade">
+      <div v-if="show">
+        hello word
+      </div>
+    </transition>
+    <button @click="handleClick">切换</button>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#root',
+      data: {
+        show: true
+      },
+      methods: {
+        handleClick: function() {
+          this.show = !this.show
+        }
+      }
+    })
+  </script>
+</body>
+</html>
